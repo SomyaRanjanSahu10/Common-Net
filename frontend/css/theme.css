@@ -1,0 +1,118 @@
+/* Common Net theme support - additive styles only */
+html.dark-theme,
+body.dark-theme {
+  --ms-list-bg: #12151b;
+  --ms-border: #343a46;
+  --ms-text-primary: #f1f3f5;
+  --ms-text-secondary: #b8c0cc;
+  --ms-text-muted: #8993a3;
+  --ms-blue-light: #20364d;
+  background: var(--ms-list-bg);
+  color: var(--ms-text-primary);
+}
+
+body.dark-theme .mf-main { background: #181c23; }
+body.dark-theme .mf-toolbar,
+body.dark-theme .modal-card,
+body.dark-theme .settings-card,
+body.dark-theme .admin-nav,
+body.dark-theme .stat-card,
+body.dark-theme .admin-table,
+body.dark-theme .suggest-dropdown,
+body.dark-theme .schedule-popover,
+body.dark-theme .user-menu,
+body.dark-theme .notif-panel {
+  background: #1c2129;
+  color: var(--ms-text-primary);
+}
+
+body.dark-theme .mf-email-list { background: #181c23; }
+body.dark-theme .email-item.selected { background: #20364d; }
+body.dark-theme .email-item:hover,
+body.dark-theme .account-row:hover,
+body.dark-theme .sugg-item:hover { background: #242a33 !important; }
+body.dark-theme .att-card,
+body.dark-theme .compose-att-chip,
+body.dark-theme .mf-search-box input,
+body.dark-theme .signature-preview,
+body.dark-theme .mf-auth-hints { background: #20252e; }
+body.dark-theme .btn-secondary {
+  background: #252b34;
+  color: var(--ms-text-primary);
+}
+body.dark-theme .btn-secondary:hover { background: #303742; }
+body.dark-theme .btn-icon:hover { background: rgba(255,255,255,.08); }
+
+body.dark-theme .form-input,
+body.dark-theme .form-select,
+body.dark-theme .form-textarea {
+  background: #20252e;
+  color: var(--ms-text-primary);
+  border-color: var(--ms-border);
+}
+body.dark-theme .compose-field-row input,
+body.dark-theme .compose-subject input,
+body.dark-theme .compose-body textarea,
+body.dark-theme .compose-editor {
+  background: #1c2129;
+  color: var(--ms-text-primary);
+}
+body.dark-theme .cal-event { background: #20364d; color: #8fc7ff; }
+body.dark-theme .cal-cell.today { background: #20364d; }
+body.dark-theme .cal-event.holiday,
+body.dark-theme .recall-banner,
+body.dark-theme .mf-auth-error,
+body.dark-theme .role-badge.admin,
+body.dark-theme .status-badge.suspended { background: #42262b; }
+body.dark-theme .role-badge.user { background: #20364d; }
+body.dark-theme .status-badge.active { background: #203d2a; }
+body.dark-theme .admin-table th { background: #20252e; }
+body.dark-theme .admin-table tr:hover td { background: #242a33; }
+body.dark-theme .admin-nav-btn.active { background: #20364d; }
+body.dark-theme .user-menu-item:hover { background: #242a33; }
+body.dark-theme .switch .slider { background: #59616e; }
+body.dark-theme .modal-overlay { background: rgba(0,0,0,.62); }
+body.dark-theme ::-webkit-scrollbar-thumb { background: #4a5260; }
+body.dark-theme ::-webkit-scrollbar-thumb:hover { background: #626c7b; }
+
+/* Authentication pages */
+body.dark-theme .mf-auth-right { background: #181c23; }
+body.dark-theme .mf-auth-card { color: var(--ms-text-primary); }
+body.dark-theme .mf-auth-success { background: #203d2a; }
+body.dark-theme .mf-auth-hints { color: var(--ms-text-primary); }
+
+/* Accessible, responsive theme control */
+.mf-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 34px;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 7px;
+  padding: 6px 10px;
+  background: rgba(255,255,255,.08);
+  color: white;
+  font: 600 12px/1 var(--font-main);
+  cursor: pointer;
+  transition: background .15s, border-color .15s;
+}
+.mf-theme-toggle:hover { background: rgba(255,255,255,.14); }
+.mf-theme-toggle:focus-visible { outline: 2px solid var(--ms-blue); outline-offset: 2px; }
+
+.mf-theme-toggle.auth-theme-toggle {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 100;
+  background: rgba(0,0,0,.08);
+  color: var(--ms-text-primary);
+  border-color: var(--ms-border);
+}
+body.dark-theme .mf-theme-toggle.auth-theme-toggle {
+  background: #252b34;
+  color: var(--ms-text-primary);
+}
+@media (max-width: 640px) {
+  .mf-theme-toggle.auth-theme-toggle { top: 12px; right: 12px; }
+}

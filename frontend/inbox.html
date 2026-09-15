@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inbox — Common Net</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/theme.css">
+<script src="js/theme.js"></script>
+<link rel="stylesheet" href="css/sidebar.css">
+<link rel="stylesheet" href="css/email.css">
+<link rel="stylesheet" href="css/compose.css">
+<link rel="stylesheet" href="css/responsive.css">
+<!-- SockJS + STOMP for real-time notifications (replaces socket.io-client) -->
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.6.1/dist/sockjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7/bundles/stomp.umd.min.js"></script>
+</head>
+<body>
+  <div class="mf-app">
+    <div id="sidebar-root"></div>
+    <div class="mf-main">
+      <div class="mf-toolbar">
+        <button class="btn-icon mf-mobile-menu-btn" id="mf-mobile-menu-btn"></button>
+        <span class="mf-toolbar-title" id="mf-toolbar-title">Inbox</span>
+        <div class="mf-search-box">
+          <span class="search-icon"></span>
+          <input type="text" id="mf-search-input" placeholder="Search mail...">
+        </div>
+      </div>
+      <div class="mf-content">
+        <div class="mf-email-list" id="mf-email-list"></div>
+        <div class="mf-email-detail" id="mf-email-detail">
+          <div class="empty-state"><span class="empty-icon"></span>Select an email to read.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/notifications.js"></script>
+<script src="js/sidebar.js"></script>
+<script src="js/compose.js"></script>
+<script src="js/email.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>

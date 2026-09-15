@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard — Common Net</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/theme.css">
+<script src="js/theme.js"></script>
+<link rel="stylesheet" href="css/sidebar.css">
+<link rel="stylesheet" href="css/signature.css">
+<link rel="stylesheet" href="css/responsive.css">
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.6.1/dist/sockjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7/bundles/stomp.umd.min.js"></script>
+</head>
+<body>
+  <div class="mf-app">
+    <div id="sidebar-root"></div>
+    <div class="mf-main">
+      <div class="mf-toolbar">
+        <button class="btn-icon mf-mobile-menu-btn" id="mf-mobile-menu-btn"></button>
+        <span class="mf-toolbar-title">Admin Dashboard</span>
+      </div>
+      <div class="admin-shell">
+        <div class="admin-nav" id="admin-nav">
+          <button class="admin-nav-btn" data-tab="dashboard">Dashboard</button>
+          <button class="admin-nav-btn" data-tab="users">Users</button>
+          <button class="admin-nav-btn" data-tab="emails">Emails</button>
+          <button class="admin-nav-btn" data-tab="logs">Admin Logs</button>
+          <button class="admin-nav-btn" data-tab="activity">Activity</button>
+        </div>
+        <div class="admin-content" id="admin-content"></div>
+      </div>
+    </div>
+  </div>
+
+<div id="toast-container" class="toast-container"></div>
+
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/notifications.js"></script>
+<script src="js/sidebar.js"></script>
+<script src="js/compose.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

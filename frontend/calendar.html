@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calendar — Common Net</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/theme.css">
+<script src="js/theme.js"></script>
+<link rel="stylesheet" href="css/sidebar.css">
+<link rel="stylesheet" href="css/email.css">
+<link rel="stylesheet" href="css/compose.css">
+<link rel="stylesheet" href="css/responsive.css">
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.6.1/dist/sockjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7/bundles/stomp.umd.min.js"></script>
+</head>
+<body>
+  <div class="mf-app">
+    <div id="sidebar-root"></div>
+    <div class="mf-main">
+      <div class="mf-toolbar">
+        <button class="btn-icon mf-mobile-menu-btn" id="mf-mobile-menu-btn"></button>
+        <span class="mf-toolbar-title" id="cal-month-label">Calendar</span>
+        <button class="btn btn-secondary" id="cal-today">Today</button>
+        <button class="btn-icon" id="cal-prev">\u2039</button>
+        <button class="btn-icon" id="cal-next">\u203A</button>
+      </div>
+      <div style="overflow-y:auto;flex:1;">
+        <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;padding:20px 20px 0;font-size:12px;font-weight:700;color:var(--ms-text-secondary);text-align:center;">
+          <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+        </div>
+        <div class="calendar-grid" id="cal-grid"></div>
+      </div>
+    </div>
+  </div>
+
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/notifications.js"></script>
+<script src="js/sidebar.js"></script>
+<script src="js/compose.js"></script>
+<script src="js/calendar.js"></script>
+<script>
+  (async () => {
+    const user = await Auth.requireAuth();
+    if (!user) return;
+    document.getElementById('mf-mobile-menu-btn').onclick = () => Sidebar.openMobile();
+    await Sidebar.render('calendar', () => Compose.open());
+    await CalendarApp.init();
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Signature — Common Net</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/theme.css">
+<script src="js/theme.js"></script>
+<link rel="stylesheet" href="css/sidebar.css">
+<link rel="stylesheet" href="css/signature.css">
+<link rel="stylesheet" href="css/responsive.css">
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.6.1/dist/sockjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7/bundles/stomp.umd.min.js"></script>
+</head>
+<body>
+  <div class="mf-app">
+    <div id="sidebar-root"></div>
+    <div class="mf-main">
+      <div class="mf-toolbar">
+        <button class="btn-icon mf-mobile-menu-btn" id="mf-mobile-menu-btn"></button>
+        <span class="mf-toolbar-title">\u270D\uFE0F Email Signature</span>
+      </div>
+      <div style="overflow-y:auto;flex:1;">
+        <div class="settings-page">
+          <div class="settings-card">
+            <div class="toggle-row">
+              <div>
+                <h2 style="margin-bottom:2px;">Email Signature</h2>
+                <p class="subtitle" style="margin-bottom:0;">Automatically append this to outgoing emails</p>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="sig-enabled" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div id="sig-toast" style="display:none;" class="mf-auth-success"></div>
+
+            <form id="sig-form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Display Name</label>
+                  <input class="form-input" id="sig-name" placeholder="Your name">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Designation</label>
+                  <input class="form-input" id="sig-designation" placeholder="e.g. Product Manager">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Company</label>
+                  <input class="form-input" id="sig-company" placeholder="Company name">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Phone Number</label>
+                  <input class="form-input" id="sig-phone" placeholder="+1 555 0100">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Regards Text</label>
+                <input class="form-input" id="sig-regards" placeholder="Best Regards">
+              </div>
+              <div style="display:flex;gap:8px;margin-top:6px;">
+                <button type="submit" class="btn btn-primary" id="sig-save-btn">Save Signature</button>
+                <button type="button" class="btn btn-danger" id="sig-remove-btn">Remove Signature</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="settings-card">
+            <h2>Live Preview</h2>
+            <p class="subtitle">How your signature will look in outgoing emails</p>
+            <div class="signature-preview" id="sig-preview"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/notifications.js"></script>
+<script src="js/sidebar.js"></script>
+<script src="js/compose.js"></script>
+<script src="js/signature.js"></script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trash — Common Net</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/theme.css">
+<script src="js/theme.js"></script>
+<link rel="stylesheet" href="css/sidebar.css">
+<link rel="stylesheet" href="css/email.css">
+<link rel="stylesheet" href="css/compose.css">
+<link rel="stylesheet" href="css/responsive.css">
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.6.1/dist/sockjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7/bundles/stomp.umd.min.js"></script>
+</head>
+<body>
+  <div class="mf-app">
+    <div id="sidebar-root"></div>
+    <div class="mf-main">
+      <div class="mf-toolbar">
+        <button class="btn-icon mf-mobile-menu-btn" id="mf-mobile-menu-btn"></button>
+        <span class="mf-toolbar-title">Trash</span>
+        <div class="mf-toolbar-hint" style="font-size:12px;color:var(--ms-text-muted);">Emails are auto-deleted after 30 days</div>
+        <button class="btn btn-danger" id="empty-trash-btn" style="margin-left:12px;">Empty Trash</button>
+      </div>
+      <div id="trash-list" style="padding:16px 24px;overflow-y:auto;flex:1;"></div>
+    </div>
+  </div>
+
+<div id="toast-container" class="toast-container"></div>
+
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/notifications.js"></script>
+<script src="js/sidebar.js"></script>
+<script src="js/compose.js"></script>
+<script>
+  function toast(msg, type) {
+    const c = document.getElementById('toast-container');
+    const el = document.createElement('div');
+    el.className = `toast toast-${type || 'info'}`;
+    el.textContent = msg;
+    c.appendChild(el);
+    setTimeout(() => el.remove(), 3000);
+  }
+  function escapeHtml(s) { return s == null ? '' : String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function fmtDate(iso) { return new Date(iso).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' }); }
+
+  let emails = [];
+
+  async function loadTrash() {
+    const list = document.getElementById('trash-list');
+    list.innerHTML = `<div class="empty-state"><span class="spinner spinner-dark"></span></div>`;
+    try {
+      const res = await api.get('/email/trash');
+      emails = res.emails || [];
+      renderTrash();
+    } catch { list.innerHTML = `<div class="empty-state">Failed to load trash.</div>`; }
+  }
+
+  function renderTrash() {
+    const list = document.getElementById('trash-list');
+    if (!emails.length) {
+      list.innerHTML = `<div class="empty-state"><span class="empty-icon"></span>Trash is empty.</div>`;
+      return;
+    }
+    list.innerHTML = emails.map(e => `
+      <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--ms-border);">
+        <div style="flex:1;min-width:0;">
+          <div style="font-weight:600;font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escapeHtml(e.subject || '(No subject)')}</div>
+          <div style="font-size:12px;color:var(--ms-text-secondary);">${e.sender ? escapeHtml(e.sender.name) : ''} \u2192 ${e.receiver ? escapeHtml(e.receiver.name) : escapeHtml(e.toEmail || '')}</div>
+          <div style="font-size:11px;color:var(--ms-text-muted);">Trashed ${e.trashedAt ? fmtDate(e.trashedAt) : ''}</div>
+        </div>
+        <button class="btn btn-primary" data-restore="${e.id}" style="padding:7px 14px;font-size:12px;">\u267B\uFE0F Restore</button>
+        <button class="btn btn-danger" data-delete="${e.id}" style="padding:7px 14px;font-size:12px;">Delete Forever</button>
+      </div>`).join('');
+
+    list.querySelectorAll('[data-restore]').forEach(btn => btn.onclick = async () => {
+      try { await api.patch(`/email/restore/${btn.dataset.restore}`); toast('\u2705 Email restored', 'success'); loadTrash(); }
+      catch { toast('Failed to restore', 'error'); }
+    });
+    list.querySelectorAll('[data-delete]').forEach(btn => btn.onclick = async () => {
+      if (!confirm('Permanently delete this email? This action cannot be undone.')) return;
+      try { await api.delete(`/email/permanent/${btn.dataset.delete}`); toast('Email permanently deleted', 'success'); loadTrash(); }
+      catch { toast('Failed to delete', 'error'); }
+    });
+  }
+
+  document.getElementById('empty-trash-btn').onclick = async () => {
+    if (!emails.length) return;
+    if (!confirm(`Permanently delete all ${emails.length} emails in Trash? This cannot be undone.`)) return;
+    try {
+      await Promise.all(emails.map(e => api.delete(`/email/permanent/${e.id}`)));
+      toast('Trash emptied', 'success');
+      loadTrash();
+    } catch { toast('Failed to empty trash', 'error'); }
+  };
+
+  (async () => {
+    const user = await Auth.requireAuth();
+    if (!user) return;
+    document.getElementById('mf-mobile-menu-btn').onclick = () => Sidebar.openMobile();
+    await Sidebar.render('trash', () => Compose.open());
+    await loadTrash();
+  })();
+</script>
+</body>
+</html>

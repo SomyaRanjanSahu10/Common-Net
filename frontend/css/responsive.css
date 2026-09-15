@@ -1,0 +1,19 @@
+@media (max-width: 900px) {
+  .mailflow-sidebar {
+    position: fixed; left: -260px; top: 0; z-index: 200; transition: left .2s ease-out; box-shadow: 4px 0 20px rgba(0,0,0,0.2);
+  }
+  .mailflow-sidebar.mailflow-sidebar-open { left: 0; }
+  .mailflow-mobile-close { display: block; position: absolute; top: 12px; right: 12px; background: transparent; border: none; color: white; font-size: 18px; }
+  .mf-mobile-menu-btn { display: inline-flex; }
+  .mf-search-box { display: none; }
+  .mf-content { position: relative; }
+  .mf-email-list { width: 100%; min-width: 0; }
+  .mf-email-list.hide-on-mobile-detail { display: none; }
+  .mf-email-detail { display: none; }
+  .mf-email-detail.show-on-mobile { display: block; position: absolute; inset: 0; background: white; z-index: 10; }
+  .compose-modal { width: 100vw; max-width: 100vw; height: 100vh; max-height: 100vh; border-radius: 0; }
+  .notif-panel { left: 12px; width: auto; right: 12px; }
+}
+@media (min-width: 901px) {
+  .mf-mobile-menu-btn { display: none; }
+}

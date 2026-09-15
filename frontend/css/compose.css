@@ -1,0 +1,84 @@
+.compose-modal { width: 640px; max-width: 92vw; max-height: 88vh; display: flex; flex-direction: column; }
+.compose-header {
+  display: flex; align-items: center; justify-content: space-between; padding: 14px 20px;
+  background: var(--ms-sidebar-bg); color: white; border-radius: 10px 10px 0 0;
+}
+.compose-header h3 { font-size: 14px; font-weight: 600; }
+.compose-header button { background: transparent; border: none; color: white; font-size: 16px; }
+
+.compose-fields { padding: 10px 20px; border-bottom: 1px solid var(--ms-border); }
+.compose-field-row { display: flex; align-items: center; border-bottom: 1px solid var(--ms-border); padding: 8px 0; gap: 8px; position: relative; }
+.compose-field-row:last-child { border-bottom: none; }
+.compose-field-row label { width: 46px; font-size: 12.5px; color: var(--ms-text-secondary); flex-shrink: 0; }
+.compose-field-row input { flex: 1; border: none; font-size: 13.5px; outline: none; }
+.compose-cc-bcc-toggle { font-size: 11.5px; color: var(--ms-blue); background: none; border: none; }
+
+.compose-subject input { padding: 10px 20px; width: 100%; border: none; border-bottom: 1px solid var(--ms-border); font-size: 14px; outline: none; }
+
+.compose-body { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+.compose-body textarea, .compose-editor {
+  flex: 1; border: none; padding: 14px 20px; font-size: 14px; line-height: 1.7; resize: none; outline: none; overflow-y: auto;
+  min-height: 200px;
+}
+.compose-signature-block { border-top: 1px dashed var(--ms-border); margin-top: 8px; padding-top: 8px; color: var(--ms-text-secondary); }
+
+.compose-attachments { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px 20px; }
+.compose-att-chip {
+  display: flex; align-items: center; gap: 6px; background: var(--ms-list-bg); border: 1px solid var(--ms-border);
+  border-radius: 14px; padding: 4px 10px; font-size: 12px;
+}
+.compose-att-chip button { background: none; border: none; font-size: 12px; color: var(--ms-text-muted); }
+
+.compose-footer { display: flex; align-items: center; gap: 8px; padding: 12px 20px; border-top: 1px solid var(--ms-border); }
+.compose-footer .spacer { flex: 1; }
+.compose-toolbar-btn { background: transparent; border: none; font-size: 16px; padding: 6px; border-radius: 4px; color: var(--ms-text-secondary); }
+.compose-toolbar-btn:hover { background: var(--ms-list-bg); }
+
+.suggest-dropdown {
+  position: absolute; top: 100%; left: 46px; right: 0; background: white; border: 1px solid var(--ms-border);
+  border-radius: 6px; box-shadow: 0 4px 14px rgba(0,0,0,0.12); z-index: 20; max-height: 180px; overflow-y: auto;
+}
+.sugg-item { padding: 8px 12px; font-size: 12.5px; cursor: pointer; }
+
+.schedule-popover { position: absolute; bottom: 46px; left: 20px; background: white; border: 1px solid var(--ms-border); border-radius: 8px; box-shadow: 0 6px 20px rgba(0,0,0,0.15); padding: 14px; z-index: 30; }
+
+.meeting-modal { width: 620px; max-width: 92vw; max-height: 90vh; display:flex; flex-direction:column; }
+.meeting-form { padding:16px 20px; overflow-y:auto; display:grid; gap:12px; }
+.meeting-form label { font-size:12.5px; color:var(--ms-text-secondary); display:grid; gap:6px; }
+.meeting-description { min-height:80px; resize:vertical; }
+.meeting-user-picker { position:relative; }
+.meeting-user-results { position:absolute; left:0; right:0; top:100%; z-index:40; background:var(--ms-list-bg); border:1px solid var(--ms-border); border-radius:6px; box-shadow:0 4px 14px rgba(0,0,0,.12); max-height:180px; overflow:auto; }
+.meeting-user-result { padding:8px 10px; cursor:pointer; display:flex; flex-direction:column; gap:2px; }
+.meeting-user-result:hover { background:var(--ms-border); }
+.meeting-user-result span { font-size:11px; color:var(--ms-text-muted); }
+.meeting-selected-users { display:flex; flex-wrap:wrap; gap:6px; margin-top:7px; }
+.meeting-user-chip { display:inline-flex; align-items:center; gap:5px; border:1px solid var(--ms-border); border-radius:14px; padding:4px 8px; background:var(--ms-list-bg); font-size:12px; }
+.meeting-user-chip small { color:var(--ms-text-muted); }
+.meeting-user-chip button { border:0; background:transparent; cursor:pointer; color:var(--ms-text-muted); }
+.compose-table { border-collapse:collapse; width:100%; margin:10px 0; table-layout:fixed; }
+.compose-table td { border:1px solid var(--ms-border); padding:8px; min-width:40px; vertical-align:top; }
+.language-popover { position:absolute; bottom:46px; right:20px; background:var(--ms-list-bg); border:1px solid var(--ms-border); border-radius:8px; box-shadow:0 6px 20px rgba(0,0,0,.15); padding:12px; z-index:30; width:210px; }
+
+.compose-format-toolbar{display:flex;align-items:center;flex-wrap:wrap;gap:3px;padding:7px 20px;border-bottom:1px solid var(--ms-border);background:var(--ms-list-bg);position:relative}.compose-format-select{height:30px;border:1px solid var(--ms-border);border-radius:4px;background:var(--ms-card);color:var(--ms-text-primary);font-size:12px;padding:0 5px}.compose-format-btn{min-width:29px;height:30px;padding:4px 7px;border:1px solid transparent;border-radius:4px;background:transparent;color:var(--ms-text-primary);cursor:pointer}.compose-format-btn:hover{background:var(--ms-border)}.compose-color-input{width:30px;height:30px;padding:2px;border:1px solid var(--ms-border);border-radius:4px;background:transparent}.compose-language-btn{display:inline-flex;gap:4px;align-items:center}.compose-language-btn span{font-size:11px}.compose-popover{position:absolute;left:20px;top:42px;width:230px;padding:12px;background:var(--ms-card);color:var(--ms-text-primary);border:1px solid var(--ms-border);border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.18);z-index:60}.compose-popover label{display:grid;gap:4px;font-size:11px;margin-top:7px}.compose-table{border-collapse:collapse;width:auto;margin:8px 0}.compose-table td{min-width:70px;height:26px;border:1px solid var(--ms-border);padding:6px;vertical-align:top}
+
+.compose-signature-popover {
+  position:absolute; bottom:46px; right:20px; width:320px; max-width:calc(100vw - 40px);
+  padding:12px; background:var(--ms-card); color:var(--ms-text-primary);
+  border:1px solid var(--ms-border); border-radius:8px; box-shadow:0 8px 24px rgba(0,0,0,.18);
+  z-index:70;
+}
+.compose-signature-popover-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+.compose-signature-close { border:0; background:transparent; color:var(--ms-text-secondary); font-size:18px; cursor:pointer; }
+.compose-signature-status { font-size:12.5px; color:var(--ms-text-secondary); padding:4px 0 10px; max-height:150px; overflow:auto; }
+.compose-signature-preview {
+  padding:10px; border:1px dashed var(--ms-border); border-radius:6px;
+  background:var(--ms-list-bg); color:var(--ms-text-primary);
+}
+.compose-signature-preview p { margin-left:0; margin-right:0; }
+.compose-signature-actions { display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
+.compose-signature-actions .btn { font-size:12px; padding:6px 9px; }
+.compose-signature-manage { font-size:11.5px; color:var(--ms-blue); margin-left:auto; text-decoration:none; }
+.compose-signature-manage:hover { text-decoration:underline; }
+.compose-signature-block { position:relative; }
+.compose-signature-block:focus { outline:1px dashed var(--ms-blue); outline-offset:2px; }
+body.dark-theme .compose-signature-preview { background:#20252e; }

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign in — Common Net</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/theme.css">
+<script src="js/theme.js"></script>
+<link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+  <div class="mf-auth-page mf-login-page">
+    <div class="mf-auth-left">
+      <div class="mf-auth-brand">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+          <rect width="36" height="36" rx="8" fill="rgba(255,255,255,0.15)"/>
+          <path d="M8 10h8v8H8zM20 10h8v8h-8zM8 22h8v8H8zM20 22h8v8h-8z" fill="white"/>
+        </svg>
+        <h1>Common Net</h1>
+      </div>
+      <p class="mf-auth-tagline">Stay connected. Stay productive.</p>
+      <div class="mf-auth-feature"><span class="check"></span><span>Secure JWT authentication</span></div>
+      <div class="mf-auth-feature"><span class="check"></span><span>Real-time inbox &amp; notifications</span></div>
+      <div class="mf-auth-feature"><span class="check"></span><span>SMTP email sending</span></div>
+      <div class="mf-auth-feature"><span class="check"></span><span>Admin dashboard</span></div>
+      <div class="mf-auth-feature"><span class="check"></span><span>Forgot password flow</span></div>
+    </div>
+
+    <div class="mf-auth-right">
+      <div class="mf-auth-card">
+        <h2>Sign in</h2>
+        <p class="subtitle">to continue to Common Net</p>
+
+        <div id="login-error" class="mf-auth-error" style="display:none;"></div>
+
+        <form id="login-form">
+          <div class="form-group">
+            <label class="form-label">Email address</label>
+            <input class="form-input" type="email" id="login-email" placeholder="user1@test.com" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <input class="form-input" type="password" id="login-password" placeholder="Enter your password" required>
+          </div>
+          <div style="text-align:right;margin-bottom:16px;">
+            <a class="mf-forgot-link" href="forgot-password.html">Forgot password?</a>
+          </div>
+          <button type="submit" class="btn btn-primary" id="login-submit" style="width:100%;padding:11px;">Sign in</button>
+        </form>
+
+        <div class="mf-auth-divider">Don't have an account? <a href="register.html">Register</a></div>
+
+        <div class="mf-auth-hints">
+          <p class="mf-auth-hints-title">Test Credentials</p>
+          <p class="mf-auth-hint" data-email="user1@test.com" data-pass="123456">user1@test.com / 123456</p>
+          <p class="mf-auth-hint" data-email="user2@test.com" data-pass="123456">user2@test.com / 123456</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script>
+  Auth.redirectIfLoggedIn();
+
+  document.querySelectorAll('.mf-auth-hint').forEach(el => {
+    el.onclick = () => {
+      document.getElementById('login-email').value = el.dataset.email;
+      document.getElementById('login-password').value = el.dataset.pass;
+    };
+  });
+
+  document.getElementById('login-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const errEl = document.getElementById('login-error');
+    const submitBtn = document.getElementById('login-submit');
+    errEl.style.display = 'none';
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span class="spinner"></span>';
+    try {
+      const email = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value;
+      const data = await api.post('/auth/login', { email, password });
+      Auth.setSession(data.token, data.user);
+      location.href = data.user.role === 'admin' ? 'admin.html' : 'inbox.html';
+    } catch (err) {
+      errEl.textContent = '\u26A0 ' + (err.message || 'Login failed. Please try again.');
+      errEl.style.display = 'block';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Sign in';
+    }
+  });
+</script>
+</body>
+</html>
