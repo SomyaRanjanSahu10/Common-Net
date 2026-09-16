@@ -43,13 +43,13 @@ const Sidebar = {
           <button class="mf-sb-compose" id="mf-compose-btn">\u2795 Compose</button>
           <button class="mf-sb-compose" id="mf-schedule-meeting-btn" style="margin-top:6px;">\uD83D\uDCC5 Schedule Meeting</button>
           <div class="mf-sb-controls" aria-label="Sidebar controls">
-            // <button type="button" class="mf-sb-control-btn mf-theme-toggle" id="mf-theme-toggle"
-                    aria-label="Switch to dark mode" title="Switch to dark mode"></button>
-            <button type="button" class="mf-sb-control-btn notif-bell" id="mf-notif-bell"
-                    aria-label="Notifications" title="Notifications">
-              🔔 <span class="notif-label">Notifications</span>
-              <span class="badge notif-badge" id="mf-notif-count" style="display:none;"></span>
-            </button>
+              <button type="button" class="mf-sb-control-btn mf-theme-toggle" id="mf-theme-toggle">
+                  🌙 Dark
+              </button>
+
+              <button type="button" class="mf-sb-control-btn notif-bell" id="mf-notif-bell">
+                  🔔 Notifications
+              </button>
           </div>
         </div>
 
