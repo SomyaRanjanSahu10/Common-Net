@@ -7,7 +7,7 @@
  */
 // const API_BASE = window.MAILFLOW_API_BASE || '/api';
 
-const API_BASE = 'http://localhost:5000/api';
+const API_BASE = 'https://common-net.onrender.com/api';
 
 function authHeaders(extra = {}) {
   const token = localStorage.getItem('mf_token');
